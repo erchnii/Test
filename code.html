@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Jednoduchá Vis.js Vizualizace Grafu</title>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.21.0/vis.min.css">
+    
+    <style type="text/css">
+        /* Definice velikosti kontejneru pro graf */
+        #mynetwork {
+            width: 800px;
+            height: 500px;
+            border: 1px solid #ccc;
+            margin: 20px auto;
+        }
+    </style>
+    <input id="newNode" type="button" value="newNode" />
+    <input id="id" type="text"/>
+    <input id="delete" type="button" value="delete"/>
+</head>
+<body>
+
+    <h1>Ukázka Vis.js grafu</h1>
+
+    <div id="mynetwork"></div>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.21.0/vis.min.js"></script>
+
+    <script type="text/javascript"></script>
+
+    <script type="text/javascript">
+        // 1. Získání kontejneru pro vykreslení
+        var container = document.getElementById('mynetwork');
+        var number = document.getElementById('id').value;
+
+        document.getElementById('newNode').onclick = function () {
+            var number = document.getElementById('id').value;
+            var width = container.clientWidth;
+            var height = container.clientHeight;
+            var randomX = Math.floor(Math.random() * width) - (width / 2);
+            var randomY = Math.floor(Math.random() * height) - (height / 2);
+            nodes.update({id: number, label: '   ' + number + '   ', x: randomX, y: randomY });
+            
+        };
+
+        document.getElementById('delete').onclick = function () {
+            network.deleteSelected();
+        };
+
+        // 2. Definice Uzlů (Nodes)
+        // Uzly se definují jako pole objektů.
+        var nodes = new vis.DataSet([
+            {id: 1, label: '   1   ', color: '#FF7F7F'}, // Červený uzel
+            {id: 2, label: '   2   '},
+            {id: 3, label: '   3   '},
+            {id: 4, label: '   4   ', color: 'green'},  // Modrý uzel
+            {id: 5, label: '   5   '}
+        ]);
+
+
+        // 3. Definice Hran (Edges)
+        // Hrany se definují jako pole objektů. 'from' a 'to' odkazují na ID uzlů.
+        var edges = new vis.DataSet([
+            {from: 1, to: 2, label: '10', arrows: 'to'},
+            {from: 1, to: 3, label: '2', arrows: 'to'},
+            {from: 2, to: 4, label: '5', arrows: 'to'},
+            {from: 3, to: 5, label: '20', arrows: 'to'},
+            {from: 5, to: 4, label: '3', arrows: 'to'},
+            {from: 2, to: 5, label: '8', arrows: 'to'} 
+        ]);
+
+        // 4. Seskupení dat
+        var data = {
+            nodes: nodes,
+            edges: edges
+        };
+
+        // 5. Možnosti konfigurace (Options)
+        // Zde můžete nastavit, jak se má graf chovat (fyzika, interakce)
+        var options = {
+            layout: {
+                improvedLayout: true
+            },
+            edges: {
+                font: {
+                    align: 'middle' // Umístění váhy/labelu na střed hrany
+                },
+                smooth: {
+                    enabled: false
+                }
+            },
+            physics: {
+                enabled: false, // Zapnutí fyzikální simulace (uzly se dynamicky rozmisťují)
+                stabilization: {
+                    iterations: 1000 // Rychlejší stabilizace na začátku
+                }
+            },
+            interaction: {
+                dragNodes: true, // Povolit přetahování uzlů
+                zoomView: true   // Povolit zoomování
+            }
+        };
+
+        // 6. Vykreslení Grafu
+        var network = new vis.Network(container, data, options);
+
+        
+    </script>
+
+</body>
+</html>
+</html>
