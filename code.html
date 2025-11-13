@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <title>Jednoduchá Vis.js Vizualizace Grafu</title>
+    
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.21.0/vis.min.css">
+    
+    <link rel="stylesheet" type="text/css" href="style.css">
+    
+</head>
+<body>
+
+    <h1>Ukázka Vis.js grafu</h1>
+
+    <div class="controls">
+        <input id="newNode" type="button" value="Přidat uzel" />
+        <input id="id" type="text" placeholder="ID uzlu" />
+        <input id="delete" type="button" value="Smazat vybraný" />
+        <input id="next" type="button" value="Další krok (BFS/Dijkstra)" />
+        <input id="queue" type="text" />
+    </div>
+
+    <div id="mynetwork"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/tinyqueue@2.0.3/tinyqueue.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.21.0/vis.min.js"></script>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
